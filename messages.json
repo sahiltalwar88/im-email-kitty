@@ -1,0 +1,30 @@
+[
+    {
+        "author": "Pete Hunt",
+        "text": "Hey there!"
+    },
+    {
+        "author": "Paul O’Shannessy",
+        "text": "React is *great*!"
+    },
+    {
+        "author": "asdf",
+        "text": "fdsa",
+        "messageType": "text"
+    },
+    {
+        "author": "fdsa",
+        "text": "asdfasdf",
+        "messageType": "text"
+    },
+    {
+        "author": "dfghjdfsg",
+        "text": "djrrtshsrt",
+        "messageType": "text"
+    },
+    {
+        "author": "fasdfas",
+        "text": "asdfasdfsa",
+        "messageType": "text"
+    }
+]
