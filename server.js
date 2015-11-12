@@ -10,39 +10,50 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var fs = require('fs');
-var path = require('path');
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
+import fs from 'fs'
+import cors from 'cors'
+import path from 'path'
+import express from 'express'
+import bodyParser from 'body-parser'
 
-var MESSAGE_FILE = path.join(__dirname, 'messages.json');
+const MESSAGE_FILE = path.join(__dirname, 'messages.json')
+const app = express()
 
-app.set('port', (process.env.PORT || 3000));
+app.use(cors)
 
-app.use('/', express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.set('port', (process.env.PORT || 3000))
 
-app.get('/api/messages', function(req, res) {
-  fs.readFile(MESSAGE_FILE, function(err, data) {
-    res.setHeader('Cache-Control', 'no-cache');
-    res.json(JSON.parse(data));
-  });
-});
+app.use('/', express.static(path.join(__dirname, 'public')))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 
-app.post('/api/MESSAGE_FILE', function(req, res) {
-  fs.readFile(MESSAGE_FILE, function(err, data) {
-    var comments = JSON.parse(data);
-    comments.push(req.body);
-    fs.writeFile(MESSAGE_FILE, JSON.stringify(comments, null, 4), function(err) {
-      res.setHeader('Cache-Control', 'no-cache');
-      res.json(comments);
-    });
-  });
-});
+app.get('/api/messages', (req, res) => {
+  fs.readFile(MESSAGE_FILE, (err, data) => {
+    if (err) {
+      res.status(500).send('BORKEN!')
+    }
+    res.setHeader('Cache-Control', 'no-cache')
+    res.json(JSON.parse(data))
+  })
+})
 
+app.post('/api/MESSAGE_FILE', (req, res) => {
+  fs.readFile(MESSAGE_FILE, (err, data) => {
+    if (err) {
+      res.status(500).send('BORKEN!')
+    }
+    var comments = JSON.parse(data)
+    comments.push(req.body)
+    fs.writeFile(MESSAGE_FILE, JSON.stringify(comments, null, 4), err => {
+      if (err) {
+        res.status(500).send('BORKEN!')
+      }
+      res.setHeader('Cache-Control', 'no-cache')
+      res.json(comments)
+    })
+  })
+})
 
-app.listen(app.get('port'), function() {
-  console.log('Server started: http://localhost:' + app.get('port') + '/');
-});
+app.listen(app.get('port'), () => {
+  console.log('Server started: http://localhost:' + app.get('port') + '/')
+})
