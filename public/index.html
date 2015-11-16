@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="System.src.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.2/react-dom.js"></script>
+    <script type="text/babel" src="client/messenger.js"></script>
+    <script>
+        System.config({
+            baseURL: '/app'
+            transpiler: 'babel',
+            babelOptions: {
+                presets: [
+                  'es2015',
+                  'react',
+                  'stage-0'
+                ]
+            },
+            map:{
+                babel: './babel.js'
+            }
+        })
+        System.import('./client/messenger').then(function(sw) {
+          ReactDOM.render(
+            <MessageBox pollInterval={2000} />,
+            document.body
+          )
+        })
+    </script>
+</head>
+<body>
+</body>
+</html>

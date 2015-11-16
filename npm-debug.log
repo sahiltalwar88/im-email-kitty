@@ -9,7 +9,7 @@
 6 silly lifecycle react-tutorial@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle react-tutorial@0.0.0~start: react-tutorial@0.0.0
 8 verbose lifecycle react-tutorial@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle react-tutorial@0.0.0~start: PATH: /Users/sahil/.nvm/versions/node/v4.2.2/lib/node_modules/npm/bin/node-gyp-bin:/Users/sahil/env/messenger/react-tutorial/node_modules/.bin:./node_modules/.bin:/Users/sahil/.nvm/versions/node/v4.2.2/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+9 verbose lifecycle react-tutorial@0.0.0~start: PATH: /Users/sahil/.nvm/versions/node/v4.2.2/lib/node_modules/npm/bin/node-gyp-bin:/Users/sahil/env/messenger/react-tutorial/node_modules/.bin:/Users/sahil/.nvm/versions/node/v4.2.2/bin:./node_modules/.bin:./node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 10 verbose lifecycle react-tutorial@0.0.0~start: CWD: /Users/sahil/env/messenger/react-tutorial
 11 silly lifecycle react-tutorial@0.0.0~start: Args: [ '-c', 'babel-node server.js' ]
 12 silly lifecycle react-tutorial@0.0.0~start: Returned: code: 1  signal: null

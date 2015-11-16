@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import request from 'http-as-promised'
-import marked from 'marked'
 import {bindAll} from 'lodash'
+import request from 'http-as-promised'
+// import MessageBox from './messageBox'
 
-const url = 'http://localhost:3000/api/messages'
+const url = 'http://localhost:3000/contacts'
 
 const getInitialState = () => {
   return {data: []}
@@ -21,19 +21,18 @@ class MessageBox extends React.Component {
   loadMessagesFromServer () {
     request({
       url: url,
-      json: true
+      json: true,
+      resolve: 'body'
     })
+    .bind(this)
     .then(function (data) {
       this.setState({data: data})
-    })
-    .catch(function (err) {
-      console.error(url, err.toString())
     })
   }
 
   componentDidMount () {
     this.loadMessagesFromServer()
-    setInterval(this.loadMessagesFromServer, this.props.pollInterval)
+    // setInterval(this.loadMessagesFromServer, this.props.pollInterval)
   }
 
   handleMessageSubmit (message) {
@@ -41,7 +40,7 @@ class MessageBox extends React.Component {
     var newMessage = messages.concat([message])
     this.setState({data: newMessage})
 
-    request ({
+    request({
       url: url,
       json: message,
       method: 'POST'
@@ -49,14 +48,11 @@ class MessageBox extends React.Component {
     .then(function (data) {
       this.setState({data: data})
     })
-    .catch(function (err) {
-      console.error(url, err.toString())
-    })
   }
 
   render () {
     return (
-    <div className='messageBox'>
+      <div className='messageBox'>
         <h1>Messages</h1>
         <MessageList data={this.state.data} />
         <MessageForm onMessageSubmit={this.handleMessageSubmit} />
@@ -67,13 +63,13 @@ class MessageBox extends React.Component {
 
 class MessageList extends React.Component {
   constructor (props, context) {
-    super (props, context)
+    super(props, context)
   }
 
   render () {
-    const messageNodes = this.props.data.map(message => {
+    const messageNodes = this.props.data.map((message, index) => {
       return (
-      <Message author={message.author}>
+        <Message author={message.author} key={index}>
           {message.text}
         </Message>
       )
@@ -86,10 +82,18 @@ class MessageList extends React.Component {
   }
 }
 
+MessageList.propTypes = {
+  data: React.PropTypes.array
+}
+
+MessageList.defaultProps = {
+  data: []
+}
+
 class MessageForm extends React.Component {
   constructor (props, context) {
-    super (props, context)
-    bindAll (this, 'onFormChange', 'handleSubmit')
+    super(props, context)
+    bindAll(this, 'onFormChange', 'handleSubmit')
   }
 
   onFormChange (key, e) {}
@@ -111,7 +115,7 @@ class MessageForm extends React.Component {
 
   render () {
     return (
-    <form className='messageForm' onSubmit={this.handleSubmit}>
+      <form className='messageForm' onSubmit={this.handleSubmit}>
         <input type='text' placeholder='Your name' ref='author' />
         <input type='text' placeholder='Say something...' ref='text' />
         <MessageType onChange={this.handleTypeChange}/>
@@ -123,8 +127,8 @@ class MessageForm extends React.Component {
 
 class MessageType extends React.Component {
   constructor (props, context) {
-    super (props, context)
-    bindAll (this, 'handleTypeChange')
+    super(props, context)
+    bindAll(this, 'handleTypeChange')
   };
 
   props () { onChange: React.PropTypes.func.isRequired }
@@ -146,23 +150,13 @@ class MessageType extends React.Component {
 }
 
 class Message extends React.Component {
-  constructor (props, context) {
-    super (props, context)
-    bindAll (this, 'rawMarkup')
-  }
-
-  rawMarkup () {
-    var rawMarkup = marked(this.props.children.toString(), {sanitize: true})
-    return { __html: rawMarkup }
-  }
-
   render () {
     return (
-    <div className='message'>
+      <div className='message'>
         <h2 className='messageAuthor'>
           {this.props.author}
         </h2>
-        <span dangerouslySetInnerHTML={this.rawMarkup()} />
+        {this.props.children}
       </div>
     )
   }
