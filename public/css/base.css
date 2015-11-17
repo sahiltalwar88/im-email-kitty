@@ -1,62 +1,73 @@
-body {
-  background: #fff;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  margin: 0;
-  padding: 30px;
-}
-
-a {
-  color: #4183c4;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-code {
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  font-family: "Bitstream Vera Sans Mono", Consolas, Courier, monospace;
-  font-size: 12px;
-  margin: 0 2px;
-  padding: 0px 5px;
-}
-
-h1, h2, h3, h4 {
-  font-weight: bold;
-  margin: 0 0 15px;
-  padding: 0;
-}
-
 h1 {
   border-bottom: 1px solid #ddd;
   font-size: 2.5em;
   font-weight: bold;
-  margin: 0 0 15px;
-  padding: 0;
 }
 
 h2 {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ddd;
   font-size: 2em;
 }
 
-h3 {
+a {
+  text-decoration: none;
+}
+
+img {
+    width: 100px;
+    height: 100px
+}
+
+.contact {
   font-size: 1.5em;
+  padding-top: 6px;
+  border-top: 1px solid #ddd;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #ddd;
 }
 
-h4 {
-  font-size: 1.2em;
+.message {
+  margin-left: 12px;
 }
 
-p, ul {
-  margin: 15px 0;
+/* Lanetix styles */
+.avatar {
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
 }
 
-ul {
-  padding-left: 30px;
+.avatar .avatar-border {
+  border-color: green;
+  border-width: 3px;
+  border-style: solid;
+}
+
+.avatar .hover {
+  cursor: pointer
+}
+
+.avatar .img {
+  border-radius 50%
+  display inline-block
+  height 36px
+  width 36px
+}
+
+.default-avatar {
+  background-image: inline('images/default-avatar.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 32px;
+  width: 32px;
+  display: inline-block;
+}
+
+.default-avatar-big {
+  background-image: inline('images/avatar_default.png');
+  background-repeat: no-repeat;
+  background-size: 126px 126px;
+  border: 1px solid $borderColor;
+  height: 126px;
+  width: 126px;
 }
