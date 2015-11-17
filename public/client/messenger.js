@@ -108,6 +108,11 @@ class Contact extends React.Component {
   }
 }
 
+Contact.propTypes = {
+  name: React.PropTypes.string,
+  id: React.proptypes.number
+}
+
 class MessageBox extends React.Component {
   constructor (props, context) {
     super(props, context)
