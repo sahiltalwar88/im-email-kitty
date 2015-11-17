@@ -2,10 +2,10 @@
 import assert from 'assert'
 import React from 'react'
 import jsdom from 'mocha-jsdom'
-import Contact from '../../../public/client/contact.js'
+import ReactTestUtils from 'react-addons-test-utils'
+import Contact from '../../../public/client/contact'
 
-const TestUtils = React.addons.TestUtils
-const renderer = TestUtils.createRenderer()
+const renderer = ReactTestUtils.createRenderer()
 
 describe('Contact component', function () {
   jsdom({ useEach: true })
@@ -13,12 +13,13 @@ describe('Contact component', function () {
   let component
 
   beforeEach(() => {
-    renderer.render(<Contact name='test' id='0' />)
+    renderer.render(<Contact name='test' />)
     component = renderer.getRenderOutput()
   })
 
   it('should render a contact', function () {
     const expectedChildren = [
+      // React.DOM.img({ alt: 'a random cat gif!', className: 'avatar avatar-border avatar-default' })
       React.DOM.a({ href: '/contactDetails/1' }, 'test')
     ]
 

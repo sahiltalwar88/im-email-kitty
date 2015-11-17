@@ -3,10 +3,14 @@ import {bindAll} from 'lodash'
 import {Link} from 'react-router'
 import request from 'http-as-promised'
 
-class Contact extends React.Component {
+export default class Contact extends React.Component {
   static propTypes = {
     name: PropTypes.string,
     id: PropTypes.number
+  }
+
+  static defaultProps = {
+    id: 0
   }
 
   constructor (props, context) {
